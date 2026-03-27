@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Dhia Chaouali | Cybersecurity Analyst & Developer Portfolio</title>
+  <!-- Fonts + Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Space Grotesk', sans-serif;
+      background: #05050f;
+      color: #eef5ff;
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+      transition: background 0.3s ease;
+    }
+
+    /* RTL Support for Arabic */
+    body.rtl {
+      direction: rtl;
+      text-align: right;
+    }
+    body.rtl .nav-links,
+    body.rtl .hero-text,
+    body.rtl .about-grid,
+    body.rtl .info-chip,
+    body.rtl .certificates-grid {
+      direction: rtl;
+    }
+    body.rtl .skill-header {
+      flex-direction: row-reverse;
+    }
+
+    /* Animated Background */
+    .bg-ambient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      background: radial-gradient(circle at 20% 30%, #0a0a1a, #020208);
+    }
+    
+    .grid-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(59, 130, 246, 0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(59, 130, 246, 0.08) 1px, transparent 1px);
+      background-size: 50px 50px;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Glow Orbs */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+      z-index: -1;
+      pointer-events: none;
+      animation: float 20s infinite ease-in-out;
+    }
+    .orb-1 { width: 400px; height: 400px; background: #3b82f6; top: -100px; left: -100px; }
+    .orb-2 { width: 500px; height: 500px; background: #a855f7; bottom: -150px; right: -100px; animation-delay: -5s; }
+    .orb-3 { width: 300px; height: 300px; background: #06b6d4; top: 40%; left: 70%; animation-delay: -10s; opacity: 0.3; }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(30px, -30px) scale(1.05); }
+    }
+
+    /* Glass Navbar */
+    .glass-nav {
+      position: sticky;
+      top: 20px;
+      margin: 20px 30px;
+      background: rgba(10, 20, 40, 0.55);
+      backdrop-filter: blur(16px);
+      border-radius: 80px;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 12px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, #fff, #60a5fa, #c084fc);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: #e2e8ff;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: 0.2s;
+      cursor: pointer;
+    }
+    .nav-links a:hover { color: #60a5fa; text-shadow: 0 0 8px #3b82f6; }
+    
+    .lang-selector {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(59,130,246,0.2);
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      border: 1px solid rgba(59,130,246,0.4);
+    }
+    .lang-btn {
+      background: none;
+      border: none;
+      color: #e2e8ff;
+      cursor: pointer;
+      font-weight: 600;
+      padding: 0.3rem 0.6rem;
+      border-radius: 30px;
+      transition: 0.2s;
+      font-family: inherit;
+    }
+    .lang-btn.active {
+      background: #3b82f6;
+      color: white;
+      box-shadow: 0 0 10px #3b82f6;
+    }
+    .theme-glow {
+      background: rgba(59,130,246,0.2);
+      border: 1px solid #3b82f6;
+      border-radius: 40px;
+      padding: 8px 18px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+
+    /* Container */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 3rem;
+      text-align: center;
+      background: linear-gradient(120deg, #ffffff, #93c5fd, #c084fc);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    /* Hero with Typing Animation */
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3rem;
+      flex-wrap: wrap;
+      padding: 2rem 0;
+    }
+    .hero-badge {
+      display: inline-flex;
+      gap: 8px;
+      background: rgba(59,130,246,0.15);
+      border: 1px solid rgba(59,130,246,0.4);
+      border-radius: 40px;
+      padding: 6px 18px;
+      font-size: 0.85rem;
+      backdrop-filter: blur(4px);
+      margin-bottom: 1.5rem;
+    }
+    .hero-text h1 {
+      font-size: 5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+    .glitch {
+      background: linear-gradient(135deg, #ffffff, #3b82f6, #a855f7);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .typing-container {
+      min-height: 80px;
+      margin: 1.5rem 0 1rem;
+    }
+    #typed-text {
+      font-size: 1.4rem;
+      color: #60a5fa;
+      font-weight: 500;
+      border-right: 2px solid #3b82f6;
+      padding-right: 8px;
+      animation: blink 0.7s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { border-color: #3b82f6; }
+      50% { border-color: transparent; }
+    }
+    .hero-text p {
+      font-size: 1.1rem;
+      color: #b9c7e6;
+      max-width: 540px;
+      margin: 1rem 0 2rem;
+      line-height: 1.6;
+    }
+    .btn-futuristic {
+      background: linear-gradient(90deg, #2563eb, #7c3aed);
+      border: none;
+      padding: 14px 32px;
+      border-radius: 60px;
+      font-weight: 600;
+      color: white;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      transition: 0.3s;
+      box-shadow: 0 0 15px rgba(59,130,246,0.5);
+      cursor: pointer;
+    }
+    .btn-futuristic:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 28px rgba(59,130,246,0.8);
+    }
+    .hero-avatar img {
+      width: 300px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 2px solid rgba(59,130,246,0.6);
+      box-shadow: 0 0 50px rgba(59,130,246,0.3);
+      background: #0f1120;
+    }
+    .ring-glow {
+      position: absolute;
+      inset: -12px;
+      border-radius: 50%;
+      border: 1px solid rgba(96,165,250,0.5);
+      animation: spin 12s linear infinite;
+      pointer-events: none;
+    }
+    .hero-avatar { position: relative; }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* Glass Card */
+    .glass-card {
+      background: rgba(15, 25, 45, 0.55);
+      backdrop-filter: blur(12px);
+      border-radius: 2rem;
+      border: 1px solid rgba(59,130,246,0.3);
+      padding: 2.5rem;
+      transition: 0.3s;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+    }
+    .info-chip {
+      display: flex;
+      gap: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px dashed rgba(96,165,250,0.3);
+    }
+    .info-chip i { color: #3b82f6; width: 30px; }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.8rem;
+    }
+    .skill-holo {
+      background: rgba(20, 30, 55, 0.5);
+      backdrop-filter: blur(8px);
+      border-radius: 1.8rem;
+      padding: 1.6rem;
+      border: 1px solid rgba(59,130,246,0.4);
+    }
+    .skill-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .progress-holo {
+      height: 6px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .progress-fill-holo {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #c084fc);
+      width: 0%;
+      border-radius: 10px;
+      box-shadow: 0 0 5px #3b82f6;
+    }
+
+    /* Services */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .service-neon {
+      background: rgba(10, 20, 35, 0.6);
+      backdrop-filter: blur(8px);
+      text-align: center;
+      padding: 2rem 1.5rem;
+      border-radius: 2rem;
+      border: 1px solid rgba(59,130,246,0.3);
+      transition: 0.25s;
+    }
+    .service-neon i {
+      font-size: 2.8rem;
+      background: linear-gradient(145deg, #60a5fa, #c084fc);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+    .service-neon:hover {
+      transform: translateY(-8px);
+      border-color: #3b82f6;
+      box-shadow: 0 15px 35px rgba(59,130,246,0.2);
+    }
+
+    /* Certificates Section */
+    .certificates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .cert-card {
+      background: rgba(12, 18, 32, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 1.8rem;
+      padding: 1.8rem;
+      border: 1px solid rgba(59,130,246,0.4);
+      transition: 0.3s;
+      text-align: center;
+    }
+    .cert-card:hover {
+      transform: translateY(-5px);
+      border-color: #3b82f6;
+      box-shadow: 0 20px 35px rgba(59,130,246,0.2);
+    }
+    .cert-icon {
+      font-size: 3rem;
+      background: linear-gradient(135deg, #60a5fa, #c084fc);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+    .cert-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: #e2e8ff;
+    }
+    .cert-card p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .cert-badge {
+      display: inline-block;
+      background: rgba(59,130,246,0.25);
+      border-radius: 40px;
+      padding: 5px 15px;
+      font-size: 0.75rem;
+      color: #60a5fa;
+      margin-top: 0.5rem;
+    }
+    .cert-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #60a5fa;
+      text-decoration: none;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .cert-link:hover {
+      gap: 12px;
+      color: #c084fc;
+    }
+
+    /* Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+    .project-cyber {
+      background: rgba(12, 18, 32, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 1.8rem;
+      overflow: hidden;
+      border: 1px solid rgba(59,130,246,0.4);
+      transition: 0.3s;
+    }
+    .project-cyber:hover {
+      transform: translateY(-5px);
+      border-color: #3b82f6;
+      box-shadow: 0 20px 35px rgba(59,130,246,0.2);
+    }
+    .project-cyber img {
+      width: 100%;
+      height: 210px;
+      object-fit: cover;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+    }
+    .project-content {
+      padding: 1.6rem;
+    }
+    .project-content h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+      background: linear-gradient(135deg, #fff, #60a5fa);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #60a5fa;
+      text-decoration: none;
+      margin-top: 12px;
+      font-weight: 500;
+      transition: 0.2s;
+    }
+    .project-link:hover {
+      gap: 12px;
+      color: #c084fc;
+    }
+    .tag-future {
+      display: inline-block;
+      background: rgba(59,130,246,0.25);
+      border-radius: 40px;
+      padding: 4px 14px;
+      font-size: 0.7rem;
+      margin-top: 12px;
+      margin-right: 8px;
+    }
+
+    /* Contact */
+    .contact-future {
+      background: rgba(10, 20, 40, 0.5);
+      backdrop-filter: blur(16px);
+      border-radius: 2rem;
+      border: 1px solid rgba(59,130,246,0.4);
+      padding: 2.5rem;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .input-future {
+      width: 100%;
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid #2d3a5e;
+      padding: 1rem 1.2rem;
+      border-radius: 1.2rem;
+      color: white;
+      font-family: inherit;
+    }
+    .input-future:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 12px rgba(59,130,246,0.4);
+    }
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      border-top: 1px solid rgba(59,130,246,0.2);
+      margin-top: 2rem;
+    }
+    .social-icons a {
+      color: #b9c7e6;
+      font-size: 1.5rem;
+      margin: 0 12px;
+      transition: 0.2s;
+    }
+    .social-icons a:hover { color: #60a5fa; text-shadow: 0 0 8px; }
+
+    @media (max-width: 900px) {
+      .hero-text h1 { font-size: 3rem; }
+      .glass-nav { margin: 15px; padding: 12px 20px; flex-direction: column; }
+      .nav-links { gap: 1rem; justify-content: center; }
+      .about-grid { grid-template-columns: 1fr; }
+      .section-title { font-size: 2.2rem; }
+    }
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+    .appear {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+<div class="bg-ambient"></div>
+<div class="grid-overlay"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<nav class="glass-nav">
+  <div class="logo">✦ DHIA.CHAO</div>
+  <div class="nav-links">
+    <a data-key="navHome">⌘ Home</a>
+    <a data-key="navAbout">⟡ About</a>
+    <a data-key="navSkills">◈ Skills</a>
+    <a data-key="navServices">⤛ Services</a>
+    <a data-key="navCerts">📜 Certs</a>
+    <a data-key="navProjects">⌬ Projects</a>
+    <a data-key="navContact">✧ Contact</a>
+    <div class="lang-selector">
+      <button class="lang-btn" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="fr">FR</button>
+      <button class="lang-btn" data-lang="ar">عربي</button>
+    </div>
+    <div class="theme-glow" id="futuristicToggle"><i class="fa-regular fa-star"></i> <span>Neo</span></div>
+  </div>
+</nav>
+
+<main>
+  <div class="container" id="home">
+    <div class="hero">
+      <div class="hero-text">
+        <div class="hero-badge" data-key="heroBadge"><i class="fa-regular fa-shield-haltered"></i> 2026 | Cybersecurity & Development</div>
+        <h1><span data-key="heroName">Dhia</span> <span class="glitch" data-key="heroLastName">Chaouali</span></h1>
+        <div class="typing-container">
+          <span id="typed-text"></span>
+        </div>
+        <p data-key="heroDesc">Cybersecurity Analyst & Full-Stack Developer. Securing digital assets, building robust web ecosystems, and crafting intelligent IoT solutions.</p>
+        <a class="btn-futuristic" href="https://www.linkedin.com/in/dhia-chaouali-b5a99126b" target="_blank">
+          <i class="fa-brands fa-linkedin"></i> <span data-key="linkedinBtn">Neural Network</span> <i class="fa-solid fa-arrow-up-right-from-squares"></i>
+        </a>
+      </div>
+      <div class="hero-avatar">
+        <div class="ring-glow"></div>
+        <img src="https://i.imgur.com/nAwthZq.png" alt="Dhia">
+      </div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title" data-key="aboutTitle">/ quantum profile</h2>
+      <div class="about-grid">
+        <div class="glass-card">
+          <p style="font-size: 1.1rem; line-height: 1.7;" data-key="aboutText1">I'm Dhia — a <strong style="color:#60a5fa;">Cybersecurity Analyst & Full-Stack Developer</strong> combining security expertise with development skills. I protect digital infrastructures while building intelligent systems that merge web precision with embedded power.</p>
+          <p style="margin-top: 1.2rem; color:#b9c7e6;" data-key="aboutText2">Specializing in threat detection, vulnerability assessment, secure coding practices, and IoT security. Every project is secured by design.</p>
+        </div>
+        <div class="glass-card">
+          <div class="info-chip"><i class="fa-regular fa-user"></i> <span><strong data-key="infoIdentity">Identity</strong> — <span data-key="infoName">Dhia Chaouali</span></span></div>
+          <div class="info-chip"><i class="fa-solid fa-map-pin"></i> <span><strong data-key="infoBase">Base</strong> — <span data-key="infoLocation">Tunisia / Global</span></span></div>
+          <div class="info-chip"><i class="fa-solid fa-shield-haltered"></i> <span><strong data-key="infoRole">Role</strong> — <span data-key="infoRoleText">Cybersecurity Analyst | Developer | IoT Architect</span></span></div>
+          <div class="info-chip"><i class="fa-solid fa-microchip"></i> <span><strong data-key="infoCore">Core</strong> — <span data-key="infoCoreSkills">Security Analysis, ESP32, WebDev, Python, Automation</span></span></div>
+          <div class="info-chip"><i class="fa-regular fa-star"></i> <span><strong data-key="infoCert">Certified</strong> — <span data-key="infoCertText">GOMYCODE, Cybersecurity Essentials, Advanced Embedded Systems</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="container">
+      <h2 class="section-title" data-key="skillsTitle">// skill matrix</h2>
+      <div class="skills-grid" id="skillsGrid"></div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container">
+      <h2 class="section-title" data-key="servicesTitle">◈ cyber services</h2>
+      <div class="services-grid" id="servicesGrid"></div>
+    </div>
+  </section>
+
+  <section id="certificates">
+    <div class="container">
+      <h2 class="section-title" data-key="certsTitle">📜 certifications & achievements</h2>
+      <div class="certificates-grid" id="certificatesGrid"></div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title" data-key="projectsTitle">⎇ orbital projects</h2>
+      <div class="projects-grid" id="projectsGrid"></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <h2 class="section-title" data-key="contactTitle">✧ quantum channel</h2>
+      <div class="contact-future">
+        <div style="margin-bottom: 1.5rem;"><input type="text" id="futName" class="input-future" placeholder="Full name / alias" data-key-placeholder="contactName"></div>
+        <div style="margin-bottom: 1.5rem;"><input type="email" id="futEmail" class="input-future" placeholder="Neural address" data-key-placeholder="contactEmail"></div>
+        <div style="margin-bottom: 1.8rem;"><textarea id="futMsg" rows="4" class="input-future" placeholder="Transmit your idea..." data-key-placeholder="contactMsg"></textarea></div>
+        <button id="sendQuantum" class="btn-futuristic" style="width:100%; justify-content:center;"><i class="fa-regular fa-paper-plane"></i> <span data-key="sendBtn">Transmit message</span></button>
+        <p id="quantumFeedback" style="margin-top: 1rem; text-align:center; font-size:0.85rem;"></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="social-icons">
+    <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+    <a href="#"><i class="fa-brands fa-github"></i></a>
+    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+  </div>
+  <p style="margin-top: 1rem;" data-key="footerText">© 2026 Dhia Chaouali — Cybersecurity Analyst & Developer | Securing the future</p>
+  <p style="font-size: 0.75rem; opacity:0.7;" data-key="footerTag">⚡ Security • Development • IoT • AI ready</p>
+</footer>
+
+<script>
+  // ==================== MULTILINGUAL DATA WITH CYBERSECURITY ROLE ====================
+  const translations = {
+    en: {
+      navHome: "⌘ Home", navAbout: "⟡ About", navSkills: "◈ Skills", navServices: "⤛ Services", navCerts: "📜 Certs", navProjects: "⌬ Projects", navContact: "✧ Contact",
+      heroBadge: "🛡️ 2026 | Cybersecurity & Development", heroName: "Dhia", heroLastName: "Chaouali", heroDesc: "Cybersecurity Analyst & Full-Stack Developer. Securing digital assets, building robust web ecosystems, and crafting intelligent IoT solutions.",
+      linkedinBtn: "Connect Securely", aboutTitle: "/ security profile", aboutText1: "I'm Dhia — a <strong style='color:#60a5fa;'>Cybersecurity Analyst & Full-Stack Developer</strong> combining security expertise with development skills. I protect digital infrastructures while building intelligent systems that merge web precision with embedded power.",
+      aboutText2: "Specializing in threat detection, vulnerability assessment, secure coding practices, and IoT security. Every project is secured by design.",
+      infoIdentity: "Identity", infoName: "Dhia Chaouali", infoBase: "Base", infoLocation: "Tunisia / Global", infoRole: "Role", infoRoleText: "Cybersecurity Analyst | Developer | IoT Architect", infoCore: "Core", infoCoreSkills: "Security Analysis, ESP32, WebDev, Python, Automation", infoCert: "Certified", infoCertText: "GOMYCODE, Cybersecurity Essentials, Advanced Embedded Systems",
+      skillsTitle: "// skill matrix", servicesTitle: "◈ cyber services", certsTitle: "📜 certifications & achievements", projectsTitle: "⎇ orbital projects", contactTitle: "✧ quantum channel",
+      contactName: "Full name / alias", contactEmail: "Neural address", contactMsg: "Transmit your idea...", sendBtn: "Transmit message", footerText: "© 2026 Dhia Chaouali — Cybersecurity Analyst & Developer | Securing the future", footerTag: "⚡ Security • Development • IoT • AI ready",
+      typingStrings: ["Cybersecurity Analyst", "Full-Stack Developer", "IoT Security Specialist", "Threat Hunter", "Secure Code Architect"],
+      skills: [
+        { name: "Cybersecurity / Threat Analysis", percent: 89 }, { name: "Penetration Testing", percent: 85 }, { name: "Python / Automation", percent: 89 },
+        { name: "ESP32 / IoT Security", percent: 90 }, { name: "React / Next.js", percent: 88 }, { name: "Network Security", percent: 86 }
+      ],
+      services: ["Security Audits", "Penetration Testing", "E-commerce Solutions", "Web Development", "ESP32 Ecosystems", "Secure IoT Systems"],
+      certificates: [
+        { name: "Certified Cybersecurity Analyst", issuer: "GOMYCODE", year: "2025", icon: "fa-shield-haltered", credId: "CERT-CSA-2025" },
+        { name: "Advanced Embedded Systems Security", issuer: "GOMYCODE", year: "2025", icon: "fa-microchip", credId: "CERT-EMB-2025" },
+        { name: "Full-Stack Development Professional", issuer: "GOMYCODE", year: "2024", icon: "fa-code", credId: "CERT-FS-2024" },
+        { name: "CompTIA Security+ (In Progress)", issuer: "CompTIA", year: "2026", icon: "fa-certificate", credId: "In Progress" }
+      ],
+      projects: [
+        { title: "ZYNERO.tn", desc: "Secure e-commerce platform with encrypted payments, vulnerability scanning, and modern shopping experience.", tag: "E-Commerce + Security", link: "https://zynero.tn", icon: "fa-cart-shopping", img: "https://placehold.co/600x400/1e293b/3b82f6?text=ZYNERO.tn" },
+        { title: "GoldArtPlus.com", desc: "Premium web development with security hardening, SSL/TLS optimization, and protected user data.", tag: "Web Dev + Security", link: "https://goldartplus.com", icon: "fa-globe", img: "https://placehold.co/600x400/1e293b/c084fc?text=GoldArtPlus.com" },
+        { title: "Secure ESP32 IoT Gateway", desc: "Encrypted IoT device with secure OTA updates, anomaly detection, and cloud security monitoring.", tag: "IoT Security", link: "#", icon: "fa-microchip", img: "https://picsum.photos/id/257/600/400" }
+      ]
+    },
+    fr: {
+      navHome: "⌘ Accueil", navAbout: "⟡ À propos", navSkills: "◈ Compétences", navServices: "⤛ Services", navCerts: "📜 Certificats", navProjects: "⌬ Projets", navContact: "✧ Contact",
+      heroBadge: "🛡️ 2026 | Cybersécurité & Développement", heroName: "Dhia", heroLastName: "Chaouali", heroDesc: "Analyste en Cybersécurité & Développeur Full-Stack. Sécurisation des actifs numériques, création d'écosystèmes web robustes et solutions IoT intelligentes.",
+      linkedinBtn: "Connexion Sécurisée", aboutTitle: "/ profil sécurité", aboutText1: "Je suis Dhia — <strong style='color:#60a5fa;'>Analyste en Cybersécurité & Développeur Full-Stack</strong> alliant expertise en sécurité et compétences de développement. Je protège les infrastructures numériques tout en construisant des systèmes intelligents.",
+      aboutText2: "Spécialisé en détection de menaces, évaluation des vulnérabilités, codage sécurisé et sécurité IoT. Chaque projet est sécurisé par conception.",
+      infoIdentity: "Identité", infoName: "Dhia Chaouali", infoBase: "Localisation", infoLocation: "Tunisie / Global", infoRole: "Rôle", infoRoleText: "Analyste Cybersécurité | Développeur | Architecte IoT", infoCore: "Spécialités", infoCoreSkills: "Analyse Sécurité, ESP32, WebDev, Python, Automatisation", infoCert: "Certifié", infoCertText: "GOMYCODE, Cybersécurité Essentielle, Systèmes Embarqués Avancés",
+      skillsTitle: "// matrice de compétences", servicesTitle: "◈ services cyber", certsTitle: "📜 certifications & réalisations", projectsTitle: "⎇ projets orbitaux", contactTitle: "✧ canal quantique",
+      contactName: "Nom complet", contactEmail: "Adresse neuronale", contactMsg: "Transmettez votre idée...", sendBtn: "Transmettre", footerText: "© 2026 Dhia Chaouali — Analyste Cybersécurité & Développeur | Sécuriser le futur", footerTag: "⚡ Sécurité • Développement • IoT • IA prêt",
+      typingStrings: ["Analyste Cybersécurité", "Développeur Full-Stack", "Spécialiste IoT Security", "Chasseur de Menaces", "Architecte Code Sécurisé"],
+      skills: [
+        { name: "Cybersécurité / Analyse Menaces", percent: 89 }, { name: "Tests d'intrusion", percent: 85 }, { name: "Python / Automatisation", percent: 89 },
+        { name: "ESP32 / Sécurité IoT", percent: 90 }, { name: "React / Next.js", percent: 88 }, { name: "Sécurité Réseau", percent: 86 }
+      ],
+      services: ["Audits Sécurité", "Tests d'intrusion", "Solutions E-commerce", "Développement Web", "Écosystèmes ESP32", "Systèmes IoT Sécurisés"],
+      certificates: [
+        { name: "Analyste Cybersécurité Certifié", issuer: "GOMYCODE", year: "2025", icon: "fa-shield-haltered", credId: "CERT-CSA-2025" },
+        { name: "Sécurité Systèmes Embarqués Avancés", issuer: "GOMYCODE", year: "2025", icon: "fa-microchip", credId: "CERT-EMB-2025" },
+        { name: "Développement Full-Stack Professionnel", issuer: "GOMYCODE", year: "2024", icon: "fa-code", credId: "CERT-FS-2024" },
+        { name: "CompTIA Security+ (En Cours)", issuer: "CompTIA", year: "2026", icon: "fa-certificate", credId: "En Cours" }
+      ],
+      projects: [
+        { title: "ZYNERO.tn", desc: "Plateforme e-commerce sécurisée avec paiements cryptés et analyse de vulnérabilités.", tag: "E-Commerce + Sécurité", link: "https://zynero.tn", icon: "fa-cart-shopping", img: "https://placehold.co/600x400/1e293b/3b82f6?text=ZYNERO.tn" },
+        { title: "GoldArtPlus.com", desc: "Développement web premium avec renforcement de sécurité et protection des données.", tag: "Web Dev + Sécurité", link: "https://goldartplus.com", icon: "fa-globe", img: "https://placehold.co/600x400/1e293b/c084fc?text=GoldArtPlus.com" },
+        { title: "Passerelle IoT ESP32 Sécurisée", desc: "Appareil IoT crypté avec mises à jour OTA sécurisées et monitoring cloud.", tag: "Sécurité IoT", link: "#", icon: "fa-microchip", img: "https://picsum.photos/id/257/600/400" }
+      ]
+    },
+    ar: {
+      navHome: "⌘ الرئيسية", navAbout: "⟡ عني", navSkills: "◈ المهارات", navServices: "⤛ الخدمات", navCerts: "📜 الشهادات", navProjects: "⌬ المشاريع", navContact: "✧ اتصل",
+      heroBadge: "🛡️ 2026 | الأمن السيبراني والتطوير", heroName: "ضياء", heroLastName: "الشوالي", heroDesc: "محلل أمن سيبراني ومطور كامل المكدس. حماية الأصول الرقمية، بناء أنظمة ويب قوية، وحلول إنترنت الأشياء الذكية.",
+      linkedinBtn: "اتصال آمن", aboutTitle: "/ الملف الأمني", aboutText1: "أنا ضياء — <strong style='color:#60a5fa;'>محلل أمن سيبراني ومطور كامل المكدس</strong> أجمع بين خبرة الأمن ومهارات التطوير. أحمي البنية التحتية الرقمية أثناء بناء أنظمة ذكية.",
+      aboutText2: "متخصص في اكتشاف التهديدات، تقييم الثغرات، البرمجة الآمنة، وأمن إنترنت الأشياء. كل مشروع مؤمن بالتصميم.",
+      infoIdentity: "الهوية", infoName: "ضياء الشوالي", infoBase: "الموقع", infoLocation: "تونس / عالمياً", infoRole: "الدور", infoRoleText: "محلل أمن سيبراني | مطور | مهندس IoT", infoCore: "المجال الأساسي", infoCoreSkills: "تحليل أمني، ESP32، تطوير ويب، بايثون، أتمتة", infoCert: "الشهادات", infoCertText: "GOMYCODE، أساسيات الأمن السيبراني، أنظمة مدمجة متقدمة",
+      skillsTitle: "// مصفوفة المهارات", servicesTitle: "◈ الخدمات السيبرانية", certsTitle: "📜 الشهادات والإنجازات", projectsTitle: "⎇ مشاريع مدارية", contactTitle: "✧ القناة الكمومية",
+      contactName: "الاسم الكامل", contactEmail: "البريد الإلكتروني", contactMsg: "أرسل فكرتك...", sendBtn: "إرسال", footerText: "© 2026 ضياء الشوالي — محلل أمن سيبراني ومطور | تأمين المستقبل", footerTag: "⚡ أمن • تطوير • إنترنت الأشياء • جاهز للذكاء الاصطناعي",
+      typingStrings: ["محلل أمن سيبراني", "مطور Full-Stack", "أخصائي أمن IoT", "مطاردة التهديدات", "مهندس كود آمن"],
+      skills: [
+        { name: "الأمن السيبراني / تحليل التهديدات", percent: 89 }, { name: "اختبار الاختراق", percent: 85 }, { name: "Python / أتمتة", percent: 89 },
+        { name: "ESP32 / أمن IoT", percent: 90 }, { name: "React / Next.js", percent: 88 }, { name: "أمن الشبكات", percent: 86 }
+      ],
+      services: ["تدقيق أمني", "اختبار الاختراق", "حلول التجارة الإلكترونية", "تطوير الويب", "أنظمة ESP32", "أنظمة IoT آمنة"],
+      certificates: [
+        { name: "محلل أمن سيبراني معتمد", issuer: "GOMYCODE", year: "2025", icon: "fa-shield-haltered", credId: "CERT-CSA-2025" },
+        { name: "أمن الأنظمة المدمجة المتقدم", issuer: "GOMYCODE", year: "2025", icon: "fa-microchip", credId: "CERT-EMB-2025" },
+        { name: "تطوير Full-Stack احترافي", issuer: "GOMYCODE", year: "2024", icon: "fa-code", credId: "CERT-FS-2024" },
+        { name: "CompTIA Security+ (قيد الإنجاز)", issuer: "CompTIA", year: "2026", icon: "fa-certificate", credId: "قيد الإنجاز" }
+      ],
+      projects: [
+        { title: "ZYNERO.tn", desc: "منصة تجارة إلكترونية آمنة مع مدفوعات مشفرة وفحص الثغرات.", tag: "تجارة إلكترونية + أمن", link: "https://zynero.tn", icon: "fa-cart-shopping", img: "https://placehold.co/600x400/1e293b/3b82f6?text=ZYNERO.tn" },
+        { title: "GoldArtPlus.com", desc: "تطوير ويب متميز مع تعزيز الأمان وحماية بيانات المستخدم.", tag: "تطوير ويب + أمن", link: "https://goldartplus.com", icon: "fa-globe", img: "https://placehold.co/600x400/1e293b/c084fc?text=GoldArtPlus.com" },
+        { title: "بوابة IoT ESP32 آمنة", desc: "جهاز IoT مشفر مع تحديثات OTA آمنة ومراقبة سحابية.", tag: "أمن إنترنت الأشياء", link: "#", icon: "fa-microchip", img: "https://picsum.photos/id/257/600/400" }
+      ]
+    }
+  };
+
+  let currentLang = 'en';
+  let typingInterval;
+  let textIndex = 0;
+  let charIndex = 0;
+
+  function updateTypingAnimation() {
+    const strings = translations[currentLang].typingStrings;
+    const typedElement = document.getElementById('typed-text');
+    if (typingInterval) clearInterval(typingInterval);
+    charIndex = 0;
+    textIndex = 0;
+    function type() {
+      if (charIndex < strings[textIndex].length) {
+        typedElement.textContent += strings[textIndex].charAt(charIndex);
+        charIndex++;
+        setTimeout(type, 80);
+      } else {
+        setTimeout(() => {
+          let deleteInterval = setInterval(() => {
+            if (typedElement.textContent.length > 0) {
+              typedElement.textContent = typedElement.textContent.slice(0, -1);
+            } else {
+              clearInterval(deleteInterval);
+              textIndex = (textIndex + 1) % strings.length;
+              charIndex = 0;
+              type();
+            }
+          }, 50);
+        }, 2000);
+      }
+    }
+    type();
+  }
+
+  function updateContent() {
+    // Update text content for elements with data-key
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      if (translations[currentLang][key] !== undefined) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.placeholder = translations[currentLang][key];
+        } else {
+          el.innerHTML = translations[currentLang][key];
+        }
+      }
+    });
+    document.querySelectorAll('[data-key-placeholder]').forEach(el => {
+      const key = el.getAttribute('data-key-placeholder');
+      if (translations[currentLang][key] !== undefined) el.placeholder = translations[currentLang][key];
+    });
+
+    // Update skills grid
+    const skillsGrid = document.getElementById('skillsGrid');
+    skillsGrid.innerHTML = translations[currentLang].skills.map(skill => `
+      <div class="skill-holo">
+        <div class="skill-header">${skill.name} <span>${skill.percent}%</span></div>
+        <div class="progress-holo"><div class="progress-fill-holo" style="width:${skill.percent}%"></div></div>
+      </div>
+    `).join('');
+
+    // Update services grid
+    const servicesGrid = document.getElementById('servicesGrid');
+    const serviceIcons = ['fa-shield-haltered', 'fa-bug', 'fa-cart-shopping', 'fa-globe', 'fa-microchip', 'fa-lock'];
+    servicesGrid.innerHTML = translations[currentLang].services.map((s, i) => `
+      <div class="service-neon"><i class="fa-solid ${serviceIcons[i]}"></i><h3>${s}</h3><p style="font-size:0.85rem;">${currentLang === 'ar' ? 'خدمات احترافية' : currentLang === 'fr' ? 'Services professionnels' : 'Professional services'}</p></div>
+    `).join('');
+
+    // Update certificates grid
+    const certsGrid = document.getElementById('certificatesGrid');
+    certsGrid.innerHTML = translations[currentLang].certificates.map(cert => `
+      <div class="cert-card">
+        <div class="cert-icon"><i class="fa-solid ${cert.icon}"></i></div>
+        <h3>${cert.name}</h3>
+        <p><i class="fa-regular fa-building"></i> ${cert.issuer} • ${cert.year}</p>
+        <span class="cert-badge"><i class="fa-regular fa-id-card"></i> ${cert.credId}</span>
+        <div><a href="#" class="cert-link"><i class="fa-regular fa-eye"></i> Verify Credential →</a></div>
+      </div>
+    `).join('');
+
+    // Update projects grid
+    const projectsGrid = document.getElementById('projectsGrid');
+    projectsGrid.innerHTML = translations[currentLang].projects.map(proj => `
+      <div class="project-cyber">
+        <img src="${proj.img}" alt="${proj.title}">
+        <div class="project-content">
+          <h3><i class="fa-solid ${proj.icon}"></i> ${proj.title}</h3>
+          <p>${proj.desc}</p>
+          <span class="tag-future"><i class="fa-solid ${proj.icon === 'fa-cart-shopping' ? 'fa-cart-shopping' : proj.icon === 'fa-globe' ? 'fa-globe' : 'fa-microchip'}"></i> ${proj.tag}</span>
+          ${proj.link !== '#' ? `<a href="${proj.link}" target="_blank" class="project-link"><i class="fa-solid fa-arrow-up-right-from-squares"></i> Visit Project →</a>` : `<span class="tag-future"><i class="fa-solid fa-microchip"></i> Demo Coming</span>`}
+        </div>
+      </div>
+    `).join('');
+
+    updateTypingAnimation();
+  }
+
+  // Language switching
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentLang = btn.getAttribute('data-lang');
+      document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (currentLang === 'ar') {
+        document.body.classList.add('rtl');
+      } else {
+        document.body.classList.remove('rtl');
+      }
+      updateContent();
+    });
+  });
+
+  // Theme toggler
+  const themeBtn = document.getElementById('futuristicToggle');
+  let isLight = false;
+  function applyTheme(light) {
+    if (light) {
+      document.body.style.background = "#f1f5f9";
+      document.querySelector('.bg-ambient').style.background = "#ffffff";
+      document.querySelectorAll('.glass-card, .contact-future, .skill-holo, .service-neon, .project-cyber, .cert-card').forEach(el => {
+        el.style.background = "rgba(255,255,240,0.75)";
+        el.style.color = "#0f172a";
+      });
+      document.body.style.color = "#0f172a";
+      themeBtn.innerHTML = '<i class="fa-regular fa-moon"></i> <span>Dark</span>';
+    } else {
+      document.body.style.background = "";
+      document.querySelector('.bg-ambient').style.background = "";
+      document.querySelectorAll('.glass-card, .contact-future, .skill-holo, .service-neon, .project-cyber, .cert-card').forEach(el => {
+        el.style.background = "rgba(15, 25, 45, 0.55)";
+        el.style.color = "";
+      });
+      document.body.style.color = "";
+      themeBtn.innerHTML = '<i class="fa-regular fa-star"></i> <span>Neo</span>';
+    }
+  }
+  themeBtn.addEventListener('click', () => {
+    isLight = !isLight;
+    applyTheme(isLight);
+    localStorage.setItem('futuristicTheme', isLight ? 'light' : 'dark');
+  });
+  const saved = localStorage.getItem('futuristicTheme');
+  if (saved === 'light') { isLight = true; applyTheme(true); }
+
+  // Intersection Observer
+  const faders = document.querySelectorAll('.about-grid, .skills-grid, .services-grid, .certificates-grid, .projects-grid, .contact-future, .hero');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('appear'); });
+  }, { threshold: 0.1 });
+  faders.forEach(el => { el.classList.add('fade-up'); obs.observe(el); });
+
+  // Contact form
+  const sendBtn = document.getElementById('sendQuantum');
+  const qFeedback = document.getElementById('quantumFeedback');
+  sendBtn.addEventListener('click', () => {
+    const name = document.getElementById('futName').value.trim();
+    const email = document.getElementById('futEmail').value.trim();
+    const msg = document.getElementById('futMsg').value.trim();
+    if (!name || !email || !msg) {
+      qFeedback.innerHTML = '<span style="color:#f87171;"><i class="fa-solid fa-bolt"></i> ' + (currentLang === 'fr' ? 'tous les champs requis' : currentLang === 'ar' ? 'جميع الحقول مطلوبة' : 'all fields required') + '</span>';
+      setTimeout(() => qFeedback.innerHTML = '', 2500);
+      return;
+    }
+    if (!email.includes('@')) {
+      qFeedback.innerHTML = '<span style="color:#f87171;">' + (currentLang === 'fr' ? 'email invalide' : currentLang === 'ar' ? 'بريد إلكتروني غير صالح' : 'invalid email') + '</span>';
+      setTimeout(() => qFeedback.innerHTML = '', 2500);
+      return;
+    }
+    qFeedback.innerHTML = '<span style="color:#34d399;"><i class="fa-regular fa-circle-check"></i> ' + (currentLang === 'fr' ? 'Message reçu — Dhia vous contactera.' : currentLang === 'ar' ? 'تم استلام الرسالة — سيتواصل ضياء قريباً.' : 'Message received — Dhia will connect soon.') + '</span>';
+    document.getElementById('futName').value = '';
+    document.getElementById('futEmail').value = '';
+    document.getElementById('futMsg').value = '';
+    setTimeout(() => qFeedback.innerHTML = '', 4000);
+  });
+
+  // Smooth scroll
+  document.querySelectorAll('.nav-links a, .btn-futuristic[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(href);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Initialize with English
+  document.querySelector('.lang-btn[data-lang="en"]').classList.add('active');
+  updateContent();
+</script>
+</body>
+</html>
